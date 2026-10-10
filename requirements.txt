@@ -1,0 +1,7 @@
+neo4j
+streamlit
+pandas
+python-dotenv
+openai
+requests
+sarvamai
