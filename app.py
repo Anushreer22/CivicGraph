@@ -188,6 +188,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 # TAB 1: City Overview
 # ---------------------------------------------------------
 with tab1:
+    st.header("Thanisandra: 3.83x own baseline vs citywide 2.58x (about 1.5x relative)")
     st.subheader("Bangalore Citywide Redressal Pulse")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
@@ -268,10 +269,10 @@ with tab2:
         st.dataframe(df_inc, hide_index=True, use_container_width=True)
         st.caption("Status as of data export; recent complaints are more likely still open.")
 
-        # Weekly registered solid-waste complaints line chart (weeks 15-25 indexed to baseline = 1.0)
+        # Weekly registered solid-waste complaints line chart (weeks 15-24 indexed to baseline = 1.0)
         st.markdown("---")
         st.subheader("Weekly Solid Waste Grievances: Thanisandra vs Citywide (Indexed to Baseline = 1.0)")
-        st.caption("Weekly registered solid waste complaints indexed to baseline = 1.0 (weeks 15–25). Thanisandra baseline (excl. peak week) = 36.8/wk; Citywide baseline = 1,436.6/wk. In Week 24, Thanisandra rose to 3.83x above the citywide pattern (2.58x).")
+        st.caption("Weekly registered solid waste complaints indexed to baseline = 1.0 (weeks 15–24). Week 25 is partial (Jun 16–19) and excluded from the indexed comparison. Thanisandra baseline (excl. peak week) = 36.8/wk; Citywide baseline = 1,436.6/wk. In Week 24, Thanisandra rose to 3.83x above the citywide pattern (2.58x).")
         
         indexed_weekly_data = [
             {"Week": "Week 15", "Thanisandra (Solid Waste)": 0.81, "Citywide (Solid Waste)": 1.06},
@@ -284,7 +285,6 @@ with tab2:
             {"Week": "Week 22", "Thanisandra (Solid Waste)": 1.38, "Citywide (Solid Waste)": 1.20},
             {"Week": "Week 23", "Thanisandra (Solid Waste)": 1.38, "Citywide (Solid Waste)": 1.39},
             {"Week": "Week 24", "Thanisandra (Solid Waste)": 3.83, "Citywide (Solid Waste)": 2.58},
-            {"Week": "Week 25", "Thanisandra (Solid Waste)": 1.38, "Citywide (Solid Waste)": 1.39},
         ]
         df_weekly_chart = pd.DataFrame(indexed_weekly_data).set_index("Week")
         st.line_chart(df_weekly_chart)
@@ -301,6 +301,7 @@ with tab2:
             st.caption(details.get('status_note', 'Status as of data export; recent complaints are more likely still open.'))
 
             st.write("Recent Individual Grievance Records:")
+            st.caption("Individual grievance text descriptions are synthetic text modeled from real sub-category records.")
             complaints_table = []
             for c in details.get("complaints", [])[:15]:
                 complaints_table.append({
@@ -309,8 +310,8 @@ with tab2:
                     "Sub-Category": c["sub_category"],
                     "Status": c["status"],
                     "Language": "Kannada" if c["language"] == "kn" else "English",
-                    "Grievance Text": c["text"],
-                    "Text Source": c["text_source"]
+                    "Grievance Text (synthetic text)": c["text"],
+                    "Text Source": "synthetic text"
                 })
             st.dataframe(pd.DataFrame(complaints_table), hide_index=True, use_container_width=True)
     else:
