@@ -188,7 +188,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 # TAB 1: City Overview
 # ---------------------------------------------------------
 with tab1:
-    st.header("Thanisandra: 3.83x own baseline vs citywide 2.58x (about 1.5x relative)")
+    st.header("Thanisandra: 3.83x own baseline vs citywide 2.58x — about 1.5x relative (1.48x on the 24-week baseline, about 1.4x on the 4-week one)")
     st.subheader("Bangalore Citywide Redressal Pulse")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
