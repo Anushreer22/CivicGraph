@@ -1,0 +1,177 @@
+{
+  "infrastructure": [
+    {
+      "id": "INFRA-WPP",
+      "name": "Central Processing Facility (modeled)",
+      "type": "WasteProcessingPlant",
+      "ward": "Thanisandra",
+      "source": "synthetic"
+    },
+    {
+      "id": "INFRA-TS1",
+      "name": "Transfer Station TS-1 (modeled)",
+      "type": "TransferStation",
+      "ward": "Thanisandra",
+      "source": "synthetic"
+    },
+    {
+      "id": "INFRA-CR-TH1",
+      "name": "Thanisandra North Route (modeled)",
+      "type": "CollectionRoute",
+      "ward": "Thanisandra",
+      "source": "synthetic"
+    },
+    {
+      "id": "INFRA-CR-TH2",
+      "name": "Thanisandra Commercial Corridor (modeled)",
+      "type": "CollectionRoute",
+      "ward": "Thanisandra",
+      "source": "synthetic"
+    },
+    {
+      "id": "INFRA-CR-JK",
+      "name": "Jakkur East Feeder Route (modeled)",
+      "type": "CollectionRoute",
+      "ward": "Jakkur",
+      "source": "synthetic"
+    },
+    {
+      "id": "INFRA-CR-HM",
+      "name": "Horamavu Link Route (modeled)",
+      "type": "CollectionRoute",
+      "ward": "Horamavu",
+      "source": "synthetic"
+    },
+    {
+      "id": "INFRA-CR-BL",
+      "name": "Bellandur Outer Feeder (modeled)",
+      "type": "CollectionRoute",
+      "ward": "Bellandur",
+      "source": "synthetic"
+    }
+  ],
+  "infra_dependencies": [
+    {
+      "from": "INFRA-CR-TH1",
+      "to": "INFRA-TS1",
+      "type": "DEPENDS_ON",
+      "source": "synthetic"
+    },
+    {
+      "from": "INFRA-CR-TH2",
+      "to": "INFRA-TS1",
+      "type": "DEPENDS_ON",
+      "source": "synthetic"
+    },
+    {
+      "from": "INFRA-CR-JK",
+      "to": "INFRA-TS1",
+      "type": "DEPENDS_ON",
+      "source": "synthetic"
+    },
+    {
+      "from": "INFRA-CR-HM",
+      "to": "INFRA-TS1",
+      "type": "DEPENDS_ON",
+      "source": "synthetic"
+    },
+    {
+      "from": "INFRA-CR-BL",
+      "to": "INFRA-TS1",
+      "type": "DEPENDS_ON",
+      "source": "synthetic"
+    },
+    {
+      "from": "INFRA-TS1",
+      "to": "INFRA-WPP",
+      "type": "DEPENDS_ON",
+      "source": "synthetic"
+    }
+  ],
+  "contractors": [
+    {
+      "id": "CONT-01",
+      "name": "Contractor A (modeled)",
+      "source": "synthetic"
+    },
+    {
+      "id": "CONT-02",
+      "name": "Contractor B (modeled)",
+      "source": "synthetic"
+    },
+    {
+      "id": "CONT-03",
+      "name": "Contractor C (modeled)",
+      "source": "synthetic"
+    }
+  ],
+  "projects": [
+    {
+      "id": "PROJ-01",
+      "name": "Solid Waste Segregation & Route Upgrade (modeled)",
+      "source": "synthetic"
+    },
+    {
+      "id": "PROJ-02",
+      "name": "Facility Modernization Phase 1 (modeled)",
+      "source": "synthetic"
+    }
+  ],
+  "work_orders": [
+    {
+      "id": "WO-101",
+      "name": "Transfer Station TS-1 Compactor & Conveyor Overhaul (modeled)",
+      "status": "Delayed",
+      "delay_days": 45,
+      "target_infra": "INFRA-TS1",
+      "contractor": "CONT-01",
+      "project": "PROJ-01",
+      "contributes_to": "Solid Waste Management",
+      "source": "synthetic"
+    },
+    {
+      "id": "WO-102",
+      "name": "Primary Fleet Route Re-Alignment (modeled)",
+      "status": "Delayed",
+      "delay_days": 20,
+      "target_infra": "INFRA-CR-TH1",
+      "contractor": "CONT-02",
+      "project": "PROJ-01",
+      "contributes_to": "Solid Waste Management",
+      "source": "synthetic"
+    },
+    {
+      "id": "WO-103",
+      "name": "Processing Facility Bio-Methanization Expansion (modeled)",
+      "status": "In Progress",
+      "delay_days": 0,
+      "target_infra": "INFRA-WPP",
+      "contractor": "CONT-03",
+      "project": "PROJ-02",
+      "contributes_to": "Solid Waste Management",
+      "source": "synthetic"
+    },
+    {
+      "id": "WO-104",
+      "name": "Secondary Segregation Hopper Maintenance (modeled)",
+      "status": "Completed",
+      "delay_days": 0,
+      "target_infra": "INFRA-TS1",
+      "contractor": "CONT-01",
+      "project": "PROJ-01",
+      "contributes_to": "Solid Waste Management",
+      "source": "synthetic"
+    },
+    {
+      "id": "WO-105",
+      "name": "Jakkur Feeder Route Drainage Clearance (modeled)",
+      "status": "Completed",
+      "delay_days": 0,
+      "target_infra": "INFRA-CR-JK",
+      "contractor": "CONT-02",
+      "project": "PROJ-02",
+      "contributes_to": "Solid Waste Management",
+      "source": "synthetic"
+    }
+  ]
+}

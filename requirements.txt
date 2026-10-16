@@ -1,7 +1,9 @@
-neo4j
-streamlit
-pandas
-python-dotenv
-openai
-requests
-sarvamai
+neo4j>=5.20.0
+streamlit>=1.40.0
+pandas>=2.0.0
+python-dotenv>=1.0.0
+openai>=1.50.0
+requests>=2.30.0
+pyvis>=0.3.2
+pyvis>=0.3.2
+

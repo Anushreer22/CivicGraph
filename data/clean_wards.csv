@@ -1,0 +1,199 @@
+ward_id,ward_name,source
+WARD_001,A.Narayanapura,real
+WARD_002,Adugodi,real
+WARD_003,Agaram,real
+WARD_004,Agrahara Dasarahalli,real
+WARD_005,Anjanapur,real
+WARD_006,Arakere,real
+WARD_007,Aramane Nagar,real
+WARD_008,Attiguppe,real
+WARD_009,Azad Nagar,real
+WARD_010,BTM Layout,real
+WARD_011,Bagalagunte,real
+WARD_012,Banashankari Temple Ward,real
+WARD_013,Banaswadi,real
+WARD_014,Bapuji Nagar,real
+WARD_015,Basavanagudi,real
+WARD_016,Basavanapura,real
+WARD_017,Basaveshwara Nagar,real
+WARD_018,Begur,real
+WARD_019,Bellandur,real
+WARD_020,Benniganahalli,real
+WARD_021,Bharathi Nagar,real
+WARD_022,Bilekahalli,real
+WARD_023,Binnipet,real
+WARD_024,Bommanahalli,real
+WARD_025,Byatarayanapura,real
+WARD_026,Byrasandra,real
+WARD_027,C.V.Raman Nagar,real
+WARD_028,Chalavadipalya,real
+WARD_029,Chamrajpet,real
+WARD_030,Chikkalasandra,real
+WARD_031,Chikpete,real
+WARD_032,Chokkasandra,real
+WARD_033,Chowdeshwari Ward,real
+WARD_034,Cottonpet,real
+WARD_035,Dattathreya Temple,real
+WARD_036,Dayananda Nagar,real
+WARD_037,Deepanjali Nagar,real
+WARD_038,Devarajeevanahalli,real
+WARD_039,Devasandra,real
+WARD_040,Dharmarayaswamy Temple Ward,real
+WARD_041,Dodda Bidarkallu,real
+WARD_042,Doddabommasandra,real
+WARD_043,Doddanekkundi,real
+WARD_044,Domlur,real
+WARD_045,Dr.Rajkumar Ward,real
+WARD_046,Ejipura,real
+WARD_047,Gali Anjaneya Swamy Temple Ward,real
+WARD_048,Gandhi Nagar,real
+WARD_049,Ganeshmandira Ward,real
+WARD_050,Ganga Nagar,real
+WARD_051,Gangenahalli,real
+WARD_052,Garudacharpalya,real
+WARD_053,Gayathri Nagar,real
+WARD_054,Giri Nagar,real
+WARD_055,Gottigere,real
+WARD_056,Govindraja Nagara,real
+WARD_057,Gurappanapalya,real
+WARD_058,H.M.T,real
+WARD_059,HAL Airport,real
+WARD_060,HBR Layout,real
+WARD_061,HSR Layout,real
+WARD_062,Hagadooru,real
+WARD_063,Hampi Nagar,real
+WARD_064,Hanumantha Nagar,real
+WARD_065,Hebbal,real
+WARD_066,Hegganahalli,real
+WARD_067,Hemmigepura,real
+WARD_068,Herohalli,real
+WARD_069,Hombegowda Nagar,real
+WARD_070,Hongasandra,real
+WARD_071,Hoodi,real
+WARD_072,Horamavu,real
+WARD_073,Hosahalli,real
+WARD_074,Hosakerehalli,real
+WARD_075,Hoysala Nagar,real
+WARD_076,J.P.Nagar,real
+WARD_077,J.P.Park,real
+WARD_078,Jagajeevanram Nagar,real
+WARD_079,Jakkasandra,real
+WARD_080,Jakkur,real
+WARD_081,Jalahalli,real
+WARD_082,Jaraganahalli,real
+WARD_083,Jayachamarajendra Nagar,real
+WARD_084,Jayamahal,real
+WARD_085,Jayanagar East,real
+WARD_086,Jayangar,real
+WARD_087,Jeevanbhima Nagar,real
+WARD_088,Jnanabharathi Ward,real
+WARD_089,Jogupalya,real
+WARD_090,K.R.Market,real
+WARD_091,K.R.Puram,real
+WARD_092,Kacharakanahalli,real
+WARD_093,Kadugodi,real
+WARD_094,Kadugondanahalli,real
+WARD_095,Kamakshipalya,real
+WARD_096,Kammanahalli,real
+WARD_097,Karisandra,real
+WARD_098,Katriguppe,real
+WARD_099,Kavalbyrasandra,real
+WARD_100,Kaveripura,real
+WARD_101,Kempapura Agrahara,real
+WARD_102,Kempegowda Ward,real
+WARD_103,Kengeri,real
+WARD_104,Kodigehalli,real
+WARD_105,Konanakunte,real
+WARD_106,Konena Agrahara,real
+WARD_107,Koramangala,real
+WARD_108,Kottigepalya,real
+WARD_109,Kumaraswamy Layout,real
+WARD_110,Kushal Nagar,real
+WARD_111,Kuvempu Nagar,real
+WARD_112,Laggere,real
+WARD_113,Lakkasandra,real
+WARD_114,Lakshmidevi Nagar,real
+WARD_115,Lingarajapuram,real
+WARD_116,Madiwala,real
+WARD_117,Mahalakshmipuram,real
+WARD_118,Mallasandra,real
+WARD_119,Malleshwaram,real
+WARD_120,Mangammanapalya,real
+WARD_121,Manorayanapalya,real
+WARD_122,Marappana Palya,real
+WARD_123,Marathalli,real
+WARD_124,Marenahalli,real
+WARD_125,Maruthi Mandira Ward,real
+WARD_126,Maruthi Seva Nagar,real
+WARD_127,Mathikere,real
+WARD_128,Moodalapalya,real
+WARD_129,Muneshwara Nagar,real
+WARD_130,Nagapura,real
+WARD_131,Nagarabhavi,real
+WARD_132,Nagavara,real
+WARD_133,Nandini Layout,real
+WARD_134,Nayandanahalli,real
+WARD_135,Neelasandra,real
+WARD_136,Newthippasandra,real
+WARD_137,Okalipuram,real
+WARD_138,Padarayanapura,real
+WARD_139,Padmanabha Nagar,real
+WARD_140,Pattabhiram Nagar,real
+WARD_141,Peenya Industrial Area,real
+WARD_142,Prakash Nagar,real
+WARD_143,Pulikeshi Nagar,real
+WARD_144,Puttenahalli,real
+WARD_145,Radhakrishna Temple,real
+WARD_146,Rajagopala Nagar,real
+WARD_147,Rajaji Nagar,real
+WARD_148,Rajamahal,real
+WARD_149,Rajarajeshwari Nagar,real
+WARD_150,Ramamurthy Nagar,real
+WARD_151,Ramaswamy Palya,real
+WARD_152,Rayapuram,real
+WARD_153,S.K.Garden,real
+WARD_154,Sagayapuram,real
+WARD_155,Sampangiram Nagar,real
+WARD_156,Sanjay Nagar,real
+WARD_157,Sarakki,real
+WARD_158,Sarvagna Nagar,real
+WARD_159,Shakambari Nagar,real
+WARD_160,Shakthiganapathi Nagar,real
+WARD_161,Shankaramata,real
+WARD_162,Shanthala Nagar,real
+WARD_163,Shanthi Nagar,real
+WARD_164,Shettyhalli,real
+WARD_165,Shiva Nagar,real
+WARD_166,Shivaji Nagar,real
+WARD_167,Siddapura,real
+WARD_168,Singasandra,real
+WARD_169,Someshwara,real
+WARD_170,Sri Nagar,real
+WARD_171,Sri Rammandira,real
+WARD_172,Subedarapalya,real
+WARD_173,Subhash Nagar,real
+WARD_174,Subramanya Nagar,real
+WARD_175,Sudam Nagar,real
+WARD_176,Sudduguntepalya,real
+WARD_177,Sunkenahalli,real
+WARD_178,T-Dasarahalli,real
+WARD_179,Thanisandra,real
+WARD_180,Ullalu,real
+WARD_181,Ulsoor,real
+WARD_182,Uttarahalli,real
+WARD_183,Vannarpet,real
+WARD_184,Varthur,real
+WARD_185,Vasanth Nagar,real
+WARD_186,Vasanthapura,real
+WARD_187,Vidyapeetha,real
+WARD_188,Vidyaranyapura,real
+WARD_189,Vignana Nagar,real
+WARD_190,Vijanapura,real
+WARD_191,Vijay Nagar,real
+WARD_192,Vishwanathnagenahalli,real
+WARD_193,Visvesvarapuram,real
+WARD_194,Vrushabhavati Nagar,real
+WARD_195,Yadiyuru,real
+WARD_196,Yelachenahalli,real
+WARD_197,Yelahanka old Satellite Town,real
+WARD_198,Yeshwanthpur,real
