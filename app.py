@@ -32,38 +32,125 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom Styling
+# Custom Styling with guaranteed light and dark mode text visibility
 st.markdown("""
 <style>
-    .metric-card {
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        padding: 16px;
-        border-left: 5px solid #2b5c8f;
-        margin-bottom: 12px;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    html, body, [class*="css"] {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
+    
+    /* Top Hero Banner */
+    .hero-banner {
+        background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+        border-radius: 12px;
+        padding: 24px 28px;
+        color: #ffffff !important;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 18px rgba(15, 23, 42, 0.22);
+    }
+    .hero-title {
+        color: #ffffff !important;
+        font-size: 2.1rem;
+        font-weight: 700;
+        margin: 0 0 6px 0;
+        letter-spacing: -0.5px;
+    }
+    .hero-subtitle {
+        color: #cbd5e1 !important;
+        font-size: 1.0rem;
+        margin: 0 0 14px 0;
+        line-height: 1.5;
+        font-weight: 400;
+    }
+    .badge-pill {
+        display: inline-block;
+        padding: 5px 13px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        margin-right: 8px;
+        margin-bottom: 6px;
+        background: rgba(255, 255, 255, 0.14);
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        backdrop-filter: blur(4px);
+    }
+    
+    /* Theme-Adaptive Legend Box (Crystal-clear contrast in light AND dark mode) */
     .legend-box {
-        background-color: #eef4fb;
-        border: 1px solid #b8d2eb;
-        border-radius: 6px;
-        padding: 12px;
-        font-size: 0.9rem;
-        margin-bottom: 15px;
+        background: rgba(37, 99, 235, 0.08);
+        border: 1px solid rgba(37, 99, 235, 0.32);
+        border-left: 5px solid #2563eb;
+        border-radius: 10px;
+        padding: 16px 20px;
+        font-size: 0.92rem;
+        line-height: 1.6;
+        margin-bottom: 16px;
     }
-    .status-open { color: #d9534f; font-weight: bold; }
-    .status-resolved { color: #5cb85c; font-weight: bold; }
+    .legend-title {
+        font-weight: 700;
+        font-size: 0.96rem;
+        margin-bottom: 6px;
+        color: inherit;
+    }
+    
+    /* Modern Metric Cards */
+    [data-testid="stMetric"] {
+        background: rgba(148, 163, 184, 0.08);
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        border-radius: 10px;
+        padding: 14px 16px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    [data-testid="stMetric"]:hover {
+        border-color: rgba(59, 130, 246, 0.45);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+    
+    /* Tab Styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        font-weight: 600;
+        font-size: 0.95rem;
+        padding: 10px 18px;
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .status-open { color: #ef4444; font-weight: bold; }
+    .status-resolved { color: #10b981; font-weight: bold; }
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🏙️ CivicGraph: Bangalore Municipal Grievance Intelligence")
-st.caption("Citywide Open Data Redressal Engine with Synthetic Dependency Tracing | H1 2024 vs H1 2025")
+# Render Hero Banner
+st.markdown("""
+<div class="hero-banner">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div>
+            <div class="hero-title">🏙️ CivicGraph</div>
+            <div class="hero-subtitle">Bangalore Municipal Grievance Intelligence & Graph-Native Root Cause Redressal Engine</div>
+        </div>
+        <div>
+            <span class="badge-pill">🏛️ BBMP Sahaaya Open Data</span>
+            <span class="badge-pill">🌐 Bilingual EN / ಕನ್ನಡ</span>
+            <span class="badge-pill">⚡ Neo4j Graph Aura</span>
+            <span class="badge-pill">📅 H1 2024 vs H1 2025</span>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
-# Global UI Legend
+# Global UI Legend with guaranteed visibility across all themes
 st.markdown("""
 <div class="legend-box">
-    <strong>Data Provenance Legend:</strong><br>
-    • <strong>Real Data:</strong> Complaint records (ID, date, category, status), ward boundaries, issue categories, and volume aggregations (BBMP Sahaaya open data).<br>
-    • <strong>Synthetic Data:</strong> Individual complaint text descriptions (including Kannada translations), municipal infrastructure models, work orders, and contractors ending in <em>(modeled)</em>.
+    <div class="legend-title">📋 Data Provenance & Modeling Legend</div>
+    <div>
+        • <strong>Real Data (BBMP Sahaaya Open Data):</strong> 198 canonical ward boundaries, grievance records (ID, date, category, status), and year-over-year volume aggregations.<br>
+        • <strong>Synthetic Modeling:</strong> Individual complaint text descriptions (including 20% Kannada texts flagged <code>kn</code>), municipal infrastructure models, work orders, and contractors ending in <em>(modeled)</em>.
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -188,7 +275,13 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 # TAB 1: City Overview
 # ---------------------------------------------------------
 with tab1:
-    st.header("Thanisandra: 3.83x own baseline vs citywide 2.58x — about 1.5x relative (1.48x on the 24-week baseline, about 1.4x on the 4-week one)")
+    st.markdown("""
+    <div style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); border-radius: 10px; padding: 18px 24px; color: #ffffff !important; margin-bottom: 20px; box-shadow: 0 4px 14px rgba(30, 58, 138, 0.2);">
+        <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #93c5fd !important; margin-bottom: 4px;">⚡ Key Narrative Anchor</div>
+        <div style="font-size: 1.25rem; font-weight: 700; line-height: 1.4; color: #ffffff !important;">Thanisandra: 3.83x own baseline vs citywide 2.58x — about 1.5x relative (1.48x on the 24-week baseline, about 1.4x on the 4-week one)</div>
+        <div style="font-size: 0.88rem; color: #e0e7ff !important; margin-top: 6px;">141 registered complaints in Week 24 vs 36.8/wk baseline (excluding peak week) | Citywide Solid Waste rose 2.58x (from 1,436.6/wk to 3,702)</div>
+    </div>
+    """, unsafe_allow_html=True)
     st.subheader("Bangalore Citywide Redressal Pulse")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
