@@ -1,5 +1,8 @@
 # 🏙️ CivicGraph: Bangalore Municipal Grievance Intelligence Engine
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://civicgraph-ai.streamlit.app/)
+🌐 **Live Application:** [https://civicgraph-ai.streamlit.app/](https://civicgraph-ai.streamlit.app/)
+
 CivicGraph is a graph-native municipal intelligence and root-cause tracing platform for Bangalore (BBMP) civic grievances. It integrates real open grievance data with a synthetic municipal dependency graph to investigate civic breakdowns, compute split evidence scores, and simulate downstream cascading impacts.
 
 ---
@@ -147,7 +150,7 @@ Creates unique constraints and loads real complaints and the synthetic infrastru
 ```
 
 ### 4. Run the Dashboard
-Launches the 5-tab Streamlit dashboard:
+Access the live deployed application at **[https://civicgraph-ai.streamlit.app/](https://civicgraph-ai.streamlit.app/)**, or launch locally:
 ```bash
 .\venv\Scripts\streamlit.exe run app.py
 ```
