@@ -27,129 +27,241 @@ import streamlit.components.v1 as components
 
 # Streamlit Page Config
 st.set_page_config(
-    page_title="CivicGraph | Bangalore Municipal Intelligence",
+    page_title="CivicGraph AI | Bangalore Municipal Intelligence",
     page_icon="🏙️",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
-# Custom Styling with guaranteed light and dark mode text visibility
+# Custom Styling: Modern, clean light theme with deep navy (#1F3864) and teal (#0F8B8D) accents
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    
-    html, body, [class*="css"] {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    /* System sans-serif typography stack */
+    html, body, [class*="css"], .stApp {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background-color: #F8FAFC;
+        color: #1F3864;
     }
-    
-    /* Top Hero Banner */
+
+    /* Hide default Streamlit footer and hamburger menu */
+    #MainMenu { visibility: hidden !important; }
+    footer { display: none !important; }
+    header[data-testid="stHeader"] {
+        background: transparent !important;
+    }
+
+    /* Main Container Spacing */
+    .block-container {
+        padding-top: 1.5rem;
+        padding-bottom: 2.5rem;
+        max-width: 1300px;
+    }
+
+    /* Gradient Hero Banner */
     .hero-banner {
-        background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+        background: linear-gradient(135deg, #1F3864 0%, #164E63 55%, #0F8B8D 100%);
         border-radius: 12px;
-        padding: 24px 28px;
+        padding: 24px 30px;
         color: #ffffff !important;
-        margin-bottom: 16px;
-        box-shadow: 0 4px 18px rgba(15, 23, 42, 0.22);
+        margin-bottom: 18px;
+        box-shadow: 0 4px 20px rgba(31, 56, 100, 0.16);
     }
     .hero-title {
         color: #ffffff !important;
-        font-size: 2.1rem;
-        font-weight: 700;
+        font-size: 2.15rem;
+        font-weight: 800;
         margin: 0 0 6px 0;
         letter-spacing: -0.5px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
     .hero-subtitle {
-        color: #cbd5e1 !important;
-        font-size: 1.0rem;
-        margin: 0 0 14px 0;
+        color: #E2E8F0 !important;
+        font-size: 1.02rem;
+        margin: 0 0 16px 0;
         line-height: 1.5;
         font-weight: 400;
     }
     .badge-pill {
-        display: inline-block;
-        padding: 5px 13px;
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 14px;
         border-radius: 20px;
-        font-size: 0.78rem;
+        font-size: 0.8rem;
         font-weight: 600;
         margin-right: 8px;
         margin-bottom: 6px;
-        background: rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.16);
         color: #ffffff !important;
-        border: 1px solid rgba(255, 255, 255, 0.28);
-        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        backdrop-filter: blur(6px);
+        letter-spacing: 0.2px;
     }
-    
-    /* Theme-Adaptive Legend Box (Crystal-clear contrast in light AND dark mode) */
+
+    /* High-contrast Provenance Legend Box */
     .legend-box {
-        background: rgba(37, 99, 235, 0.08);
-        border: 1px solid rgba(37, 99, 235, 0.32);
-        border-left: 5px solid #2563eb;
-        border-radius: 10px;
+        background-color: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-left: 5px solid #0F8B8D;
+        border-radius: 12px;
         padding: 16px 20px;
         font-size: 0.92rem;
         line-height: 1.6;
-        margin-bottom: 16px;
+        margin-bottom: 18px;
+        box-shadow: 0 2px 8px rgba(31, 56, 100, 0.04);
     }
     .legend-title {
         font-weight: 700;
         font-size: 0.96rem;
-        margin-bottom: 6px;
-        color: inherit;
+        margin-bottom: 8px;
+        color: #1F3864;
+        display: flex;
+        align-items: center;
+        gap: 6px;
     }
-    
-    /* Modern Metric Cards */
+
+    /* Colored Chips for Real vs Synthetic / Modeled */
+    .chip-real {
+        display: inline-flex;
+        align-items: center;
+        background-color: #E6F4EA;
+        color: #137333 !important;
+        border: 1px solid #A8DAB5;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        padding: 2px 8px;
+        border-radius: 12px;
+        vertical-align: middle;
+        line-height: 1.3;
+    }
+    .chip-modeled {
+        display: inline-flex;
+        align-items: center;
+        background-color: #FEF7E0;
+        color: #B06000 !important;
+        border: 1px solid #FDD663;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        padding: 2px 8px;
+        border-radius: 12px;
+        vertical-align: middle;
+        line-height: 1.3;
+    }
+
+    /* White Rounded Cards */
+    .cg-card {
+        background-color: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
+        padding: 20px 24px;
+        box-shadow: 0 2px 8px rgba(31, 56, 100, 0.04);
+        margin-bottom: 18px;
+    }
+
+    /* Card Metrics Styling */
     [data-testid="stMetric"] {
-        background: rgba(148, 163, 184, 0.08);
-        border: 1px solid rgba(148, 163, 184, 0.22);
-        border-radius: 10px;
-        padding: 14px 16px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        background: #FFFFFF !important;
+        border: 1px solid #E2E8F0 !important;
+        border-radius: 12px !important;
+        padding: 16px 18px !important;
+        box-shadow: 0 2px 8px rgba(31, 56, 100, 0.04) !important;
+        transition: all 0.2s ease-in-out !important;
     }
     [data-testid="stMetric"]:hover {
-        border-color: rgba(59, 130, 246, 0.45);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        border-color: #0F8B8D !important;
+        box-shadow: 0 4px 14px rgba(15, 139, 141, 0.12) !important;
+        transform: translateY(-1px);
     }
-    
-    /* Tab Styling */
+    [data-testid="stMetricLabel"] {
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        color: #475569 !important;
+    }
+    [data-testid="stMetricValue"] {
+        font-size: 1.85rem !important;
+        font-weight: 800 !important;
+        color: #1F3864 !important;
+    }
+    [data-testid="stMetricDelta"] {
+        font-size: 0.82rem !important;
+        font-weight: 600 !important;
+    }
+
+    /* Modern Tabs Styling */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
+        background: #EDF2F7;
+        padding: 6px;
+        border-radius: 10px;
     }
     .stTabs [data-baseweb="tab"] {
         font-weight: 600;
-        font-size: 0.95rem;
-        padding: 10px 18px;
-        border-radius: 8px 8px 0 0;
+        font-size: 0.92rem;
+        padding: 8px 16px;
+        border-radius: 8px;
+        color: #475569;
+        background: transparent;
+        transition: all 0.15s ease-in-out;
     }
-    
-    .status-open { color: #ef4444; font-weight: bold; }
-    .status-resolved { color: #10b981; font-weight: bold; }
+    .stTabs [aria-selected="true"] {
+        background: #FFFFFF !important;
+        color: #1F3864 !important;
+        box-shadow: 0 2px 6px rgba(31, 56, 100, 0.08) !important;
+    }
+
+    /* Tables & DataFrames */
+    [data-testid="stDataFrame"] {
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(31, 56, 100, 0.03);
+    }
+
+    /* Status indicators */
+    .status-open { color: #dc2626; font-weight: 700; }
+    .status-resolved { color: #16a34a; font-weight: 700; }
+
+    /* Single-line sleek footer */
+    .cg-footer {
+        border-top: 1px solid #E2E8F0;
+        padding-top: 18px;
+        margin-top: 36px;
+        margin-bottom: 24px;
+        text-align: center;
+        font-size: 0.82rem;
+        color: #64748B;
+        line-height: 1.6;
+    }
 </style>
 """, unsafe_allow_html=True)
 
-# Render Hero Banner
+# Render Hero Banner with exact title, subtitle, and badges
 st.markdown("""
 <div class="hero-banner">
-    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
         <div>
-            <div class="hero-title">🏙️ CivicGraph</div>
-            <div class="hero-subtitle">Bangalore Municipal Grievance Intelligence & Graph-Native Root Cause Redressal Engine</div>
+            <div class="hero-title">🏙️ CivicGraph AI</div>
+            <div class="hero-subtitle">From complaints to connected incidents: a Neo4j graph of Bengaluru civic data</div>
         </div>
         <div>
-            <span class="badge-pill">🏛️ BBMP Sahaaya Open Data</span>
-            <span class="badge-pill">🌐 Bilingual EN / ಕನ್ನಡ</span>
-            <span class="badge-pill">⚡ Neo4j Graph Aura</span>
-            <span class="badge-pill">📅 H1 2024 vs H1 2025</span>
+            <span class="badge-pill">🏛️ Real BBMP open data</span>
+            <span class="badge-pill">🔗 Modeled dependency layer</span>
+            <span class="badge-pill">🌐 Kannada + English</span>
         </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Global UI Legend with guaranteed visibility across all themes
+# Global UI Provenance Legend with colored chips
 st.markdown("""
 <div class="legend-box">
     <div class="legend-title">📋 Data Provenance & Modeling Legend</div>
     <div>
-        • <strong>Real Data (BBMP Sahaaya Open Data):</strong> 198 canonical ward boundaries, grievance records (ID, date, category, status), and year-over-year volume aggregations.<br>
-        • <strong>Synthetic Modeling:</strong> Individual complaint text descriptions (including 20% Kannada texts flagged <code>kn</code>), municipal infrastructure models, work orders, and contractors ending in <em>(modeled)</em>.
+        • <span class="chip-real">REAL</span> <strong>Real Data (BBMP Sahaaya Open Data):</strong> 198 canonical ward boundaries, grievance records (ID, date, category, status), and year-over-year volume aggregations.<br>
+        • <span class="chip-modeled">MODELED</span> <strong>Synthetic Modeling:</strong> Individual complaint text descriptions (including 20% Kannada texts flagged <code>kn</code>), municipal infrastructure models, work orders, and contractors ending in <em>(modeled)</em>.
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -248,10 +360,58 @@ with st.container():
     if target_query:
         with st.spinner("Analyzing graph and executing queries..."):
             agent_result = ask_city(target_query)
-        st.markdown(f"**Inquiry:** `{target_query}`")
+
+        # Chat-style layout: User question as right-aligned bubble
+        st.markdown(f"""
+        <div style="display: flex; justify-content: flex-end; margin-top: 14px; margin-bottom: 14px;">
+            <div style="background: linear-gradient(135deg, #1F3864 0%, #164E63 100%); color: #ffffff; padding: 12px 18px; border-radius: 16px 16px 2px 16px; max-width: 80%; box-shadow: 0 4px 14px rgba(31,56,100,0.12);">
+                <div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #93C5FD; margin-bottom: 4px;">Citizen Inquiry</div>
+                <div style="font-size: 0.98rem; font-weight: 500; line-height: 1.4; color: #ffffff;">{target_query}</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
         if agent_result.get("english_translation"):
-            st.caption(f"**English Translation:** {agent_result['english_translation']}")
-        st.markdown(agent_result["answer"])
+            st.markdown(f"""
+            <div style="text-align: right; margin-top: -8px; margin-bottom: 14px;">
+                <span style="font-size: 0.8rem; color: #475569; background: #F1F5F9; padding: 4px 10px; border-radius: 12px; border: 1px solid #E2E8F0;">
+                    🌐 English Translation (machine translated): <em>{agent_result['english_translation']}</em>
+                </span>
+            </div>
+            """, unsafe_allow_html=True)
+
+        # Side-by-side English and Kannada columns if Kannada answer exists
+        if agent_result.get("kannada_answer") and agent_result.get("is_kannada"):
+            col_en, col_kn = st.columns(2)
+            with col_en:
+                st.markdown("""
+                <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-top: 4px solid #1F3864; border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(31,56,100,0.05); margin-bottom: 14px;">
+                    <div style="font-weight: 700; color: #1F3864; font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                        🇬🇧 English Response
+                    </div>
+                """, unsafe_allow_html=True)
+                st.markdown(agent_result.get("english_answer", ""))
+                st.markdown("</div>", unsafe_allow_html=True)
+            with col_kn:
+                st.markdown("""
+                <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-top: 4px solid #0F8B8D; border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(15,139,141,0.05); margin-bottom: 14px;">
+                    <div style="font-weight: 700; color: #0F8B8D; font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+                        <span>🇮🇳 ಕನ್ನಡ ಉತ್ತರ</span>
+                        <span style="font-size: 0.72rem; font-weight: 600; background: #E0F2FE; color: #0369A1; padding: 2px 8px; border-radius: 10px;">Machine translated</span>
+                    </div>
+                """, unsafe_allow_html=True)
+                st.markdown(agent_result.get("kannada_answer", ""))
+                st.markdown("</div>", unsafe_allow_html=True)
+        else:
+            # Single answer in a left card
+            st.markdown("""
+            <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-left: 5px solid #0F8B8D; border-radius: 12px; padding: 18px 22px; box-shadow: 0 2px 8px rgba(31,56,100,0.05); margin-bottom: 14px;">
+                <div style="font-weight: 700; color: #1F3864; font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                    🤖 CivicGraph Redressal Intelligence
+                </div>
+            """, unsafe_allow_html=True)
+            st.markdown(agent_result["answer"])
+            st.markdown("</div>", unsafe_allow_html=True)
 
         with st.expander("🛠️ Tools Called & Execution Trace", expanded=True):
             if agent_result.get("tools_called"):
@@ -262,7 +422,7 @@ with st.container():
                 st.info("No external tools called.")
     st.markdown("---")
 
-# 5 Main Tabs
+# 5 Main Tabs with exact text and emojis
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📊 City Overview",
     "⚠️ Active Incidents",
@@ -276,35 +436,35 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 # ---------------------------------------------------------
 with tab1:
     st.markdown("""
-    <div style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); border-radius: 10px; padding: 18px 24px; color: #ffffff !important; margin-bottom: 20px; box-shadow: 0 4px 14px rgba(30, 58, 138, 0.2);">
-        <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #93c5fd !important; margin-bottom: 4px;">⚡ Key Narrative Anchor</div>
+    <div style="background: linear-gradient(135deg, #1F3864 0%, #164E63 100%); border-radius: 12px; padding: 20px 24px; color: #ffffff !important; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(31, 56, 100, 0.16);">
+        <div style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #ffffff !important; margin-bottom: 6px;">⚡ Key Narrative Anchor</div>
         <div style="font-size: 1.25rem; font-weight: 700; line-height: 1.4; color: #ffffff !important;">Thanisandra: 3.83x own baseline vs citywide 2.58x — about 1.5x relative (1.48x on the 24-week baseline, about 1.4x on the 4-week one)</div>
-        <div style="font-size: 0.88rem; color: #e0e7ff !important; margin-top: 6px;">141 registered complaints in Week 24 vs 36.8/wk baseline (excluding peak week) | Citywide Solid Waste rose 2.58x (from 1,436.6/wk to 3,702)</div>
+        <div style="font-size: 0.88rem; color: #ffffff !important; margin-top: 6px;">141 registered complaints in Week 24 vs 36.8/wk baseline (excluding peak week) | Citywide Solid Waste rose 2.58x (from 1,436.6/wk to 3,702)</div>
     </div>
     """, unsafe_allow_html=True)
     st.subheader("Bangalore Citywide Redressal Pulse")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.metric(
-            label="Citywide Registered Complaints Growth",
+            label="📊 Citywide Registered Complaints Growth",
             value=f"+{CITYWIDE_H1_PCT_CHANGE}%",
             delta="H1 2024 vs H1 2025"
         )
     with col2:
         st.metric(
-            label="Top Surge Above Citywide Pattern",
+            label="🚨 Top Surge Above Citywide Pattern",
             value="Thanisandra",
             delta=f"{SPIKE_MULTIPLIER}x vs baseline (above citywide pattern)"
         )
     with col3:
         st.metric(
-            label="Recent Real Complaints Loaded",
+            label="📋 Recent Real Complaints Loaded",
             value="2,487",
             help="Real BBMP complaints from the 14-day window (Jun 6–Jun 19, 2025) across the top 8 wards (no sampling cap)."
         )
     with col4:
         st.metric(
-            label="Formed Incidents",
+            label="🧩 Formed Incidents",
             value="57",
             help="Ward + Issue clusters with at least 5 registered complaints in the window."
         )
@@ -323,7 +483,20 @@ with tab1:
         {"Rank": 7, "Ward Name": "Begur", "H1 2024": 1515, "H1 2025": 2338, "% Change": "+54.32%", "vs Citywide": "-9.67%", "Full-Year 2024": 3755},
         {"Rank": 8, "Ward Name": "Bellandur", "H1 2024": 1123, "H1 2025": 2257, "% Change": "+100.98%", "vs Citywide": "+36.99%", "Full-Year 2024": 3679},
     ]
-    st.dataframe(pd.DataFrame(top8_data), hide_index=True, use_container_width=True)
+    st.dataframe(
+        pd.DataFrame(top8_data),
+        hide_index=True,
+        use_container_width=True,
+        column_config={
+            "Rank": st.column_config.NumberColumn("Rank", format="%d", width="small"),
+            "Ward Name": st.column_config.TextColumn("Ward Name"),
+            "H1 2024": st.column_config.NumberColumn("H1 2024", format="%d"),
+            "H1 2025": st.column_config.NumberColumn("H1 2025", format="%d"),
+            "% Change": st.column_config.TextColumn("% Change"),
+            "vs Citywide": st.column_config.TextColumn("vs Citywide"),
+            "Full-Year 2024": st.column_config.NumberColumn("Full-Year 2024", format="%d")
+        }
+    )
 
 # ---------------------------------------------------------
 # TAB 2: Active Incidents
@@ -348,7 +521,8 @@ with tab2:
 
     if incidents_list:
         df_inc = pd.DataFrame(incidents_list)[['incident_id', 'ward', 'issue_type', 'complaint_count', 'open_count', 'resolved_count', 'source']]
-        df_inc['open_share'] = (df_inc['open_count'] / df_inc['complaint_count']).map(lambda x: f"{x:.1%}")
+        # Keep numeric float for ProgressColumn
+        df_inc['open_share'] = df_inc['open_count'] / df_inc['complaint_count']
         df_inc = df_inc.rename(columns={
             'incident_id': 'Incident ID',
             'ward': 'Ward',
@@ -359,14 +533,35 @@ with tab2:
             'open_share': 'Open Share',
             'source': 'Source'
         })[['Incident ID', 'Ward', 'Issue Type', 'Total Complaints', 'Open Count', 'Resolved Count', 'Open Share', 'Source']]
-        st.dataframe(df_inc, hide_index=True, use_container_width=True)
+
+        st.dataframe(
+            df_inc,
+            hide_index=True,
+            use_container_width=True,
+            column_config={
+                "Incident ID": st.column_config.TextColumn("Incident ID"),
+                "Ward": st.column_config.TextColumn("Ward"),
+                "Issue Type": st.column_config.TextColumn("Issue Type"),
+                "Total Complaints": st.column_config.NumberColumn("Total Complaints", format="%d"),
+                "Open Count": st.column_config.NumberColumn("Open Count", format="%d"),
+                "Resolved Count": st.column_config.NumberColumn("Resolved Count", format="%d"),
+                "Open Share": st.column_config.ProgressColumn(
+                    "Open Share",
+                    help="Ratio of open complaints to total complaints",
+                    min_value=0.0,
+                    max_value=1.0,
+                    format="%.1f%%"
+                ),
+                "Source": st.column_config.TextColumn("Source")
+            }
+        )
         st.caption("Status as of data export; recent complaints are more likely still open.")
 
         # Weekly registered solid-waste complaints line chart (weeks 15-24 indexed to baseline = 1.0)
         st.markdown("---")
         st.subheader("Weekly Solid Waste Grievances: Thanisandra vs Citywide (Indexed to Baseline = 1.0)")
         st.caption("Weekly registered solid waste complaints indexed to baseline = 1.0 (weeks 15–24). Week 25 is partial (Jun 16–19) and excluded from the indexed comparison. Thanisandra baseline (excl. peak week) = 36.8/wk; Citywide baseline = 1,436.6/wk. In Week 24, Thanisandra rose to 3.83x above the citywide pattern (2.58x).")
-        
+
         indexed_weekly_data = [
             {"Week": "Week 15", "Thanisandra (Solid Waste)": 0.81, "Citywide (Solid Waste)": 1.06},
             {"Week": "Week 16", "Thanisandra (Solid Waste)": 0.76, "Citywide (Solid Waste)": 0.95},
@@ -380,7 +575,13 @@ with tab2:
             {"Week": "Week 24", "Thanisandra (Solid Waste)": 3.83, "Citywide (Solid Waste)": 2.58},
         ]
         df_weekly_chart = pd.DataFrame(indexed_weekly_data).set_index("Week")
-        st.line_chart(df_weekly_chart)
+        st.line_chart(
+            df_weekly_chart,
+            color=["#1F3864", "#0F8B8D"],
+            x_label="Observation Week",
+            y_label="Indexed Ratio (Baseline = 1.0)",
+            use_container_width=True
+        )
 
         st.markdown("---")
         st.subheader("Incident Complaint Inspector")
@@ -406,7 +607,20 @@ with tab2:
                     "Grievance Text (synthetic text)": c["text"],
                     "Text Source": "synthetic text"
                 })
-            st.dataframe(pd.DataFrame(complaints_table), hide_index=True, use_container_width=True)
+            st.dataframe(
+                pd.DataFrame(complaints_table),
+                hide_index=True,
+                use_container_width=True,
+                column_config={
+                    "Complaint ID": st.column_config.TextColumn("Complaint ID"),
+                    "Date Logged": st.column_config.TextColumn("Date Logged"),
+                    "Sub-Category": st.column_config.TextColumn("Sub-Category"),
+                    "Status": st.column_config.TextColumn("Status"),
+                    "Language": st.column_config.TextColumn("Language"),
+                    "Grievance Text (synthetic text)": st.column_config.TextColumn("Grievance Text (synthetic text)", width="large"),
+                    "Text Source": st.column_config.TextColumn("Text Source")
+                }
+            )
     else:
         st.info("No incidents found matching the selected filters.")
 
@@ -419,7 +633,7 @@ with tab3:
 
     incidents_all = get_incidents()
     inc_options = [f"{r['incident_id']} - {r['ward']} ({r['issue_type']})" for r in incidents_all]
-    
+
     # Default to INC-001 (Thanisandra)
     default_idx = 0
     for idx, opt in enumerate(inc_options):
@@ -439,15 +653,16 @@ with tab3:
         else:
             st.success(f"Analysis complete for {trace_res['incident_id']} ({trace_res['ward']} - {trace_res['issue_type']})")
 
+            tot_score = trace_res.get("evidence_score", 0)
+            rd_score = trace_res.get("real_data_score", 0)
+            md_score = trace_res.get("modeled_link_score", 0)
+
             col_m1, col_m2, col_m3 = st.columns(3)
             with col_m1:
                 st.metric("Total Incident Volume", f"{trace_res['complaint_count']} complaints", f"{trace_res['open_count']} open / {trace_res['resolved_count']} resolved")
             with col_m2:
                 st.metric("YoY Trend for Issue", f"{trace_res['pct_change']:+.1f}%", f"vs Citywide: {trace_res['vs_citywide']:+}%")
             with col_m3:
-                tot_score = trace_res.get("evidence_score", 0)
-                rd_score = trace_res.get("real_data_score", 0)
-                md_score = trace_res.get("modeled_link_score", 0)
                 st.metric("Evidence Score", f"{tot_score} / 95", f"Real: {rd_score}/40 | Model: {md_score}/55")
 
             st.caption(f"ℹ️ {trace_res['baseline_note']}")
@@ -484,29 +699,91 @@ with tab3:
             if top_cand:
                 st.subheader("Primary Modeled Contributing Factor")
                 st.markdown(f"""
-                - **Work Order**: `{top_cand['work_order_id']}` — **{top_cand['work_order_name']}**
-                - **Status**: :red[**{top_cand['status']}**] ({top_cand['delay_days']} days overdue)
-                - **Target Infrastructure**: **{top_cand['affected_infrastructure']}** ({top_cand['infrastructure_type']})
-                - **Assigned Contractor**: {top_cand['contractor']}
-                - **Project**: {top_cand['project']}
-                """)
+                <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px 22px; box-shadow: 0 2px 8px rgba(31,56,100,0.04); margin-bottom: 16px;">
+                    <div style="margin-bottom: 8px;">• <strong>Work Order:</strong> <code>{top_cand['work_order_id']}</code> — <strong>{top_cand['work_order_name']}</strong> <span class="chip-modeled">MODELED</span></div>
+                    <div style="margin-bottom: 8px;">• <strong>Status:</strong> <span style="color: #dc2626; font-weight: 700;">{top_cand['status']}</span> ({top_cand['delay_days']} days overdue)</div>
+                    <div style="margin-bottom: 8px;">• <strong>Target Infrastructure:</strong> <strong>{top_cand['affected_infrastructure']}</strong> ({top_cand['infrastructure_type']})</div>
+                    <div style="margin-bottom: 8px;">• <strong>Assigned Contractor:</strong> {top_cand['contractor']}</div>
+                    <div>• <strong>Project:</strong> {top_cand['project']}</div>
+                </div>
+                """, unsafe_allow_html=True)
 
-                st.markdown(f"#### Split Evidence Score: `{tot_score} / 95`")
-                st.markdown(f"- **Real-Data Evidence**: `{rd_score} / 40 pts` (complaint count, spike vs baseline, trend vs citywide)")
-                st.markdown(f"- **Modeled-Link Evidence**: `{md_score} / 55 pts` (work order, contributes-to, dependency chain)")
+                # Evidence Score Card with horizontal progress bars
+                rd_pct = min(max(int((rd_score / 40.0) * 100), 0), 100)
+                md_pct = min(max(int((md_score / 55.0) * 100), 0), 100)
+                st.markdown(f"""
+                <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 22px 24px; box-shadow: 0 2px 10px rgba(31,56,100,0.05); margin: 18px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 8px;">
+                        <div>
+                            <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #475569;">Split Evidence Score</div>
+                            <div style="font-size: 1.85rem; font-weight: 800; color: #1F3864;">{tot_score} <span style="font-size: 1.05rem; font-weight: 500; color: #64748B;">/ 95 pts</span></div>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <span class="chip-real">REAL: {rd_score}/40 pts</span>
+                            <span class="chip-modeled">MODELED: {md_score}/55 pts</span>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 14px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 0.88rem;">
+                            <span><span class="chip-real">REAL</span> <strong>Real-Data Evidence</strong> <span style="color: #64748B; font-size: 0.8rem;">(complaint count, spike vs baseline, trend vs citywide)</span></span>
+                            <span style="font-weight: 700; color: #137333;">{rd_score} / 40 pts</span>
+                        </div>
+                        <div style="width: 100%; height: 10px; background-color: #E2E8F0; border-radius: 6px; overflow: hidden;">
+                            <div style="width: {rd_pct}%; height: 100%; background: linear-gradient(90deg, #10B981 0%, #059669 100%); border-radius: 6px;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 0.88rem;">
+                            <span><span class="chip-modeled">MODELED</span> <strong>Modeled-Link Evidence</strong> <span style="color: #64748B; font-size: 0.8rem;">(work order, contributes-to, dependency chain)</span></span>
+                            <span style="font-weight: 700; color: #B06000;">{md_score} / 55 pts</span>
+                        </div>
+                        <div style="width: 100%; height: 10px; background-color: #E2E8F0; border-radius: 6px; overflow: hidden;">
+                            <div style="width: {md_pct}%; height: 100%; background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%); border-radius: 6px;"></div>
+                        </div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
 
                 st.markdown("##### Detailed Fired Rules:")
                 for rule in trace_res.get("rules_fired", []):
                     cat = rule.get("category", "")
-                    st.markdown(f"- **+{rule['points']} pts** `[{cat}]` (`{rule['rule']}`): {rule['description']}")
+                    chip_html = '<span class="chip-real">REAL</span>' if cat.lower() == 'real' else '<span class="chip-modeled">MODELED</span>'
+                    st.markdown(f"- **+{rule['points']} pts** {chip_html} `[{cat}]` (`{rule['rule']}`): {rule['description']}", unsafe_allow_html=True)
 
                 st.warning(f"⚠️ **Evidence Rule Note**: {trace_res['evidence_rule_note']}")
             else:
                 st.info("No active work orders mapped to this issue type.")
 
             st.markdown("---")
-            st.subheader("Interactive Incident Dependency Subgraph")
-            st.caption("Visualizing Incident, Ward, Issue, Work Orders, and Infrastructure dependencies (pyvis graph).")
+            # Wrap pyvis graph in a sleek card container with title and node color legend
+            st.markdown("""
+            <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px 24px 10px 24px; box-shadow: 0 2px 8px rgba(31,56,100,0.04); margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 14px; gap: 10px;">
+                    <div>
+                        <h4 style="margin: 0; color: #1F3864; font-weight: 700;">🕸️ Interactive Incident Dependency Subgraph</h4>
+                        <span style="font-size: 0.82rem; color: #64748B;">Visualizing Incident, Ward, Issue, Work Orders, and Infrastructure dependencies (pyvis graph)</span>
+                    </div>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                        <span style="display: inline-flex; align-items: center; font-size: 0.78rem; font-weight: 600; color: #334155;">
+                            <span style="width: 12px; height: 12px; border-radius: 3px; background-color: #e74c3c; margin-right: 5px; display: inline-block;"></span> Incident
+                        </span>
+                        <span style="display: inline-flex; align-items: center; font-size: 0.78rem; font-weight: 600; color: #334155;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background-color: #3498db; margin-right: 5px; display: inline-block;"></span> Ward
+                        </span>
+                        <span style="display: inline-flex; align-items: center; font-size: 0.78rem; font-weight: 600; color: #334155;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background-color: #f39c12; margin-right: 5px; display: inline-block;"></span> Issue
+                        </span>
+                        <span style="display: inline-flex; align-items: center; font-size: 0.78rem; font-weight: 600; color: #334155;">
+                            <span style="width: 12px; height: 12px; border-radius: 3px; background-color: #9b59b6; margin-right: 5px; display: inline-block;"></span> Work order
+                        </span>
+                        <span style="display: inline-flex; align-items: center; font-size: 0.78rem; font-weight: 600; color: #334155;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background-color: #1abc9c; margin-right: 5px; display: inline-block;"></span> Infrastructure
+                        </span>
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
             graph_data = graph_for_incident(target_inc_id)
             if graph_data.get("nodes"):
                 net = Network(height="460px", width="100%", bgcolor="#ffffff", font_color="#2c3e50", directed=True)
@@ -553,34 +830,43 @@ with tab4:
 
     work_orders = get_all_work_orders()
     wo_options = [f"{wo['id']} - {wo['name']} [{wo['status']}]" for wo in work_orders]
-    selected_wo_opt = st.selectbox("Select Work Order to Simulate", wo_options, index=0)
-    target_wo_id = selected_wo_opt.split(" ")[0]
+
+    col_wos, col_sld = st.columns([3, 2])
+    with col_wos:
+        selected_wo_opt = st.selectbox("Select Work Order to Simulate", wo_options, index=0)
+        target_wo_id = selected_wo_opt.split(" ")[0]
+    with col_sld:
+        extra_days = st.slider("Additional Delay Days to Simulate", min_value=0, max_value=60, value=14, step=1, help="Simulate linear projection of additional complaints over this delay window.")
 
     if st.button("⚡ Simulate Downstream Delay Impact", type="primary"):
-        sim_res = what_if_delay(target_wo_id)
+        sim_res = what_if_delay(target_wo_id, extra_days=extra_days)
         if "error" in sim_res:
             st.error(sim_res["error"])
         else:
             st.markdown(f"### Simulation Results for `{sim_res['work_order_id']}`")
-            st.markdown(f"**Target Facility**: {sim_res['target_infrastructure']} | **Status**: {sim_res['status']} ({sim_res['delay_days']} days delay)")
+            st.markdown(f"**Target Facility**: {sim_res['target_infrastructure']} <span class=\"chip-modeled\">MODELED</span> | **Status**: {sim_res['status']} ({sim_res['delay_days']} days delay)", unsafe_allow_html=True)
 
-            c1, c2, c3 = st.columns(3)
+            c1, c2, c3, c4 = st.columns(4)
             with c1:
                 st.metric("Real Complaints in Catchment", sim_res["total_real_complaints_impacted"])
             with c2:
                 st.metric("Open Complaints", sim_res["total_open_complaints"])
             with c3:
                 st.metric("Resolved Complaints", sim_res["total_resolved_complaints"])
+            with c4:
+                st.metric("Projected Additional Complaints", f"+{sim_res['total_projected_additional_complaints']}", f"at +{extra_days} extra delay days")
 
             st.caption(f"📌 {sim_res['status_caption']}")
             st.caption(f"⚠️ {sim_res['evidence_note']}")
 
             st.markdown("#### Connected Dependent Infrastructure Chain (DEPENDS_ON*1..3):")
+            st.caption("Modeled infrastructure dependencies in the catchment area.")
             dep_infras = sim_res.get("dependent_infrastructure", [])
             if dep_infras:
                 st.dataframe(pd.DataFrame(dep_infras), hide_index=True, use_container_width=True)
 
             st.markdown("#### Real Grievance Catchment by Ward:")
+            st.caption("Real registered complaints aggregated across affected catchment wards in the 14-day observation window.")
             st.dataframe(pd.DataFrame(sim_res.get("ward_breakdown", [])), hide_index=True, use_container_width=True)
 
 # ---------------------------------------------------------
@@ -598,14 +884,8 @@ with tab5:
     if trends_data:
         df_trends = pd.DataFrame(trends_data)
 
-        # Bar chart comparison
-        chart_df = df_trends.melt(
-            id_vars=['issue_type'],
-            value_vars=['h1_2024_registered_complaints', 'h1_2025_registered_complaints'],
-            var_name='Period',
-            value_name='Registered Complaints'
-        )
-        chart_df['Period'] = chart_df['Period'].replace({
+        # Bar chart comparison with consistent Navy (#1F3864) and Teal (#0F8B8D) palette
+        chart_df = df_trends[['issue_type', 'h1_2024_registered_complaints', 'h1_2025_registered_complaints']].rename(columns={
             'h1_2024_registered_complaints': 'H1 2024 (Jan 1-Jun 19)',
             'h1_2025_registered_complaints': 'H1 2025 (Jan 1-Jun 19)'
         })
@@ -613,8 +893,10 @@ with tab5:
         st.bar_chart(
             chart_df,
             x='issue_type',
-            y='Registered Complaints',
-            color='Period',
+            y=['H1 2024 (Jan 1-Jun 19)', 'H1 2025 (Jan 1-Jun 19)'],
+            color=['#1F3864', '#0F8B8D'],
+            x_label='Issue Type',
+            y_label='Registered Complaints',
             use_container_width=True
         )
 
@@ -636,7 +918,20 @@ with tab5:
             'vs_citywide': 'Percentage Points vs Citywide',
             'full_year_2024_context': 'Full Year 2024 Total'
         })
-        st.dataframe(display_trends, hide_index=True, use_container_width=True)
+        st.dataframe(
+            display_trends,
+            hide_index=True,
+            use_container_width=True,
+            column_config={
+                "Issue Type": st.column_config.TextColumn("Issue Type"),
+                "H1 2024 Registered Complaints": st.column_config.NumberColumn("H1 2024 Registered Complaints", format="%d"),
+                "H1 2025 Registered Complaints": st.column_config.NumberColumn("H1 2025 Registered Complaints", format="%d"),
+                "Ward % Change": st.column_config.TextColumn("Ward % Change"),
+                "Citywide Same-Issue % Change": st.column_config.TextColumn("Citywide Same-Issue % Change"),
+                "Percentage Points vs Citywide": st.column_config.TextColumn("Percentage Points vs Citywide"),
+                "Full Year 2024 Total": st.column_config.NumberColumn("Full Year 2024 Total", format="%d")
+            }
+        )
 
         st.markdown("---")
         st.subheader("Top Rising Registered Complaints Across All Bangalore Wards")
@@ -652,5 +947,28 @@ with tab5:
             'vs_citywide': 'Percentage Points vs Citywide',
             'absolute_increase': 'Absolute Volume Increase'
         })[['Ward', 'Issue Type', 'H1 2024 Registered Complaints', 'H1 2025 Registered Complaints', 'Ward % Change', 'Citywide Same-Issue % Change', 'Percentage Points vs Citywide', 'Absolute Volume Increase']]
-        st.dataframe(df_rising, hide_index=True, use_container_width=True)
 
+        st.dataframe(
+            df_rising,
+            hide_index=True,
+            use_container_width=True,
+            column_config={
+                "Ward": st.column_config.TextColumn("Ward"),
+                "Issue Type": st.column_config.TextColumn("Issue Type"),
+                "H1 2024 Registered Complaints": st.column_config.NumberColumn("H1 2024 Registered Complaints", format="%d"),
+                "H1 2025 Registered Complaints": st.column_config.NumberColumn("H1 2025 Registered Complaints", format="%d"),
+                "Ward % Change": st.column_config.TextColumn("Ward % Change"),
+                "Citywide Same-Issue % Change": st.column_config.TextColumn("Citywide Same-Issue % Change"),
+                "Percentage Points vs Citywide": st.column_config.TextColumn("Percentage Points vs Citywide"),
+                "Absolute Volume Increase": st.column_config.NumberColumn("Absolute Volume Increase", format="%d")
+            }
+        )
+
+# ---------------------------------------------------------
+# FOOTER
+# ---------------------------------------------------------
+st.markdown("""
+<div class="cg-footer">
+    <span class="chip-real">REAL</span> complaint records, wards, categories, status, volumes. <span class="chip-modeled">MODELED</span> complaint text, infrastructure, work orders, contractors. Registered complaints may reflect growth in reporting channels. Association is not causation.
+</div>
+""", unsafe_allow_html=True)
