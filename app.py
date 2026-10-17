@@ -437,9 +437,9 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 with tab1:
     st.markdown("""
     <div style="background: linear-gradient(135deg, #1F3864 0%, #164E63 100%); border-radius: 12px; padding: 20px 24px; color: #ffffff !important; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(31, 56, 100, 0.16);">
-        <div style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #93C5FD !important; margin-bottom: 6px;">⚡ Key Narrative Anchor</div>
+        <div style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #ffffff !important; margin-bottom: 6px;">⚡ Key Narrative Anchor</div>
         <div style="font-size: 1.25rem; font-weight: 700; line-height: 1.4; color: #ffffff !important;">Thanisandra: 3.83x own baseline vs citywide 2.58x — about 1.5x relative (1.48x on the 24-week baseline, about 1.4x on the 4-week one)</div>
-        <div style="font-size: 0.88rem; color: #E2E8F0 !important; margin-top: 6px;">141 registered complaints in Week 24 vs 36.8/wk baseline (excluding peak week) | Citywide Solid Waste rose 2.58x (from 1,436.6/wk to 3,702)</div>
+        <div style="font-size: 0.88rem; color: #ffffff !important; margin-top: 6px;">141 registered complaints in Week 24 vs 36.8/wk baseline (excluding peak week) | Citywide Solid Waste rose 2.58x (from 1,436.6/wk to 3,702)</div>
     </div>
     """, unsafe_allow_html=True)
     st.subheader("Bangalore Citywide Redressal Pulse")
