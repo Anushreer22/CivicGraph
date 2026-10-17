@@ -161,6 +161,44 @@ st.markdown("""
         margin-bottom: 18px;
     }
 
+    /* Executive Key Narrative Anchor Card */
+    .narrative-card {
+        background-color: #FFFFFF !important;
+        border: 1px solid #E2E8F0 !important;
+        border-left: 5px solid #0F8B8D !important;
+        border-radius: 12px !important;
+        padding: 20px 24px !important;
+        margin-bottom: 20px !important;
+        box-shadow: 0 2px 10px rgba(31, 56, 100, 0.05) !important;
+    }
+    .narrative-tag {
+        display: inline-flex !important;
+        align-items: center !important;
+        font-size: 0.76rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        color: #0F8B8D !important;
+        background-color: #E6FFFA !important;
+        border: 1px solid #B2F5EA !important;
+        padding: 3px 10px !important;
+        border-radius: 20px !important;
+        margin-bottom: 8px !important;
+    }
+    .narrative-title {
+        font-size: 1.25rem !important;
+        font-weight: 800 !important;
+        line-height: 1.4 !important;
+        color: #1F3864 !important;
+        margin-bottom: 6px !important;
+    }
+    .narrative-desc {
+        font-size: 0.90rem !important;
+        color: #475569 !important;
+        line-height: 1.5 !important;
+        margin: 0 !important;
+    }
+
     /* Card Metrics Styling */
     [data-testid="stMetric"] {
         background: #FFFFFF !important;
@@ -436,10 +474,10 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 # ---------------------------------------------------------
 with tab1:
     st.markdown("""
-    <div style="background: linear-gradient(135deg, #1F3864 0%, #164E63 100%); border-radius: 12px; padding: 20px 24px; color: #ffffff !important; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(31, 56, 100, 0.16);">
-        <div style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #ffffff !important; margin-bottom: 6px;">⚡ Key Narrative Anchor</div>
-        <div style="font-size: 1.25rem; font-weight: 700; line-height: 1.4; color: #ffffff !important;">Thanisandra: 3.83x own baseline vs citywide 2.58x — about 1.5x relative (1.48x on the 24-week baseline, about 1.4x on the 4-week one)</div>
-        <div style="font-size: 0.88rem; color: #ffffff !important; margin-top: 6px;">141 registered complaints in Week 24 vs 36.8/wk baseline (excluding peak week) | Citywide Solid Waste rose 2.58x (from 1,436.6/wk to 3,702)</div>
+    <div class="narrative-card">
+        <div class="narrative-tag">⚡ Key Narrative Anchor</div>
+        <div class="narrative-title">Thanisandra: 3.83x own baseline vs citywide 2.58x — about 1.5x relative (1.48x on the 24-week baseline, about 1.4x on the 4-week one)</div>
+        <div class="narrative-desc">141 registered complaints in Week 24 vs 36.8/wk baseline (excluding peak week) | Citywide Solid Waste rose 2.58x (from 1,436.6/wk to 3,702)</div>
     </div>
     """, unsafe_allow_html=True)
     st.subheader("Bangalore Citywide Redressal Pulse")
